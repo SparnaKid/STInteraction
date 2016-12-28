@@ -1,0 +1,59 @@
+package com.example.delllaptop.stinteraction;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+public class TeacherForm extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_teacher_form);
+    }
+
+    public int registerTeacher()
+    {
+        EditText Phoneno,Whatsappno;
+        Spinner faculty;
+
+        int i =0;
+
+        Phoneno = (EditText) this.findViewById(R.id.PhoneNo1ET);
+        Whatsappno =(EditText) this.findViewById(R.id.WhatsappNo1ET);
+        faculty = (Spinner) this.findViewById(R.id.FacultyTypeS);
+
+        String fac = String.valueOf(faculty.getSelectedItem());
+
+        if (Phoneno.getText().toString().isEmpty() || Phoneno.getText().toString().length()<10 || Phoneno.getText().toString().length()>10)
+        {
+            Phoneno.requestFocus();
+            Phoneno.setError("Enter the 10 digit number");
+            i++;
+        }
+        if (Whatsappno.getText().toString().isEmpty() || Whatsappno.getText().toString().length()<10 || Whatsappno.getText().toString().length()>10)
+        {
+            Whatsappno.requestFocus();
+            Whatsappno.setError("Enter the 10 digit number");
+            i++;
+        }
+        if (fac.equals("Select"))
+        {
+            ((TextView) faculty.getSelectedView()).setError("Select the account type");
+            i++;
+        }
+        if(i<3)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+
+}

@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">ST Interaction</string>
+
+    //Login
+    <string name="Login">Login</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="SignIn">Sign In</string>
+    <string name="SignUp">SIgn Up</string>
+
+    //Main Form
+    <string name="Registration">Registration</string>
+    <string name="Name">Name</string>
+    <string name="Username1">Username</string>
+    <string name="Password1">Password</string>
+    <string name="RetypePwd">Retype Password</string>
+    <string name="EmailId">Email Id</string>
+    <string name="AccType">Account Type</string>
+    <string-array name="AccValues">
+        <item name="Student">Student</item>
+        <item name="Teacher">Teacher</item>
+    </string-array>
+    <string name="Back">Back</string>
+    <string name="Next">Next</string>
+
+    //Student Form
+    <string name="StudentRegistration">Student Registration</string>
+    <string name="Rollno">Roll Number</string>
+    <string name="Year">Year</string>
+
+    <string-array name="YearValue">
+            <item name="First">First Year</item>
+            <item name="Second">Second Year</item>
+            <item name="Third">Third Year</item>
+    </string-array>
+
+    <string name="PhoneNo">Phone Number</string>
+    <string name="WhatsappNo">Whatsapp Number</string>
+    <string name="Address">Address</string>
+    <string name="ParentName">Parent Name</string>
+    <string name="PPhoneNo">Parent Phone Number</string>
+    <string name="PWhatsappNo">Parent Whatsapp Number</string>
+    <string name="PEmailId">Parent Email Id</string>
+    <string name="Relation">Relation</string>
+</resources>

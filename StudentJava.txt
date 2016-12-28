@@ -1,0 +1,101 @@
+package com.example.delllaptop.stinteraction;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+public class StudentForm extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_student_form);
+    }
+
+    public int studentFormValidation()
+    {
+        EditText Rollno,Phoneno,Whatsappno,Add,Pname,PPhoneno,PWhatsappno,PEmailid;
+        Spinner year,relation;
+
+        Rollno = (EditText) this.findViewById(R.id.RollNoET);
+        Phoneno = (EditText) this.findViewById(R.id.PhoneNoET);
+        Whatsappno =(EditText) this.findViewById(R.id.WhatsappNoET);
+        Add = (EditText) this.findViewById(R.id.AddressET);
+        Pname =(EditText) this.findViewById(R.id.ParentNameET);
+        PPhoneno =(EditText) this.findViewById(R.id.PPhoneNoET);
+        PWhatsappno =(EditText) this.findViewById(R.id.PWhatsappNoET);
+        PEmailid = (EditText) this.findViewById(R.id.PEmailIdET);
+
+        year =(Spinner) this.findViewById(R.id.YearS);
+        relation = (Spinner) this.findViewById(R.id.RelationS);
+
+
+        String yr = String.valueOf(year.getSelectedItem());
+        String rel = String.valueOf(relation.getSelectedItem());
+
+        if(Rollno.getText().toString().isEmpty() || Rollno.getText().toString().length()>3)
+        {
+            Rollno.requestFocus();
+            Rollno.setError("Enter the roll no");
+        }
+        if (yr.equals("Select"))
+        {
+            ((TextView) year.getSelectedView()).setError("Select the account type");
+        }
+        if (Phoneno.getText().toString().isEmpty() || Phoneno.getText().toString().length()<10 || Phoneno.getText().toString().length()>10)
+        {
+            Phoneno.requestFocus();
+            Phoneno.setError("Enter the 10 digit number");
+        }
+        if (Whatsappno.getText().toString().isEmpty() || Whatsappno.getText().toString().length()<10 || Whatsappno.getText().toString().length()>10)
+        {
+            Whatsappno.requestFocus();
+            Whatsappno.setError("Enter the 10 digit number");
+        }
+        if (Add.getText().toString().isEmpty())
+        {
+            Add.requestFocus();
+            Add.setError("Enter the address");
+        }
+        if (Pname.getText().toString().isEmpty())
+        {
+            Pname.requestFocus();
+            Pname.setError("Enter the parent name");
+        }
+        if (PPhoneno.getText().toString().isEmpty() || PPhoneno.getText().toString().length()<10 || PPhoneno.getText().toString().length()>10)
+        {
+            PPhoneno.requestFocus();
+            PPhoneno.setError("Enter the 10 digit number");
+        }
+        if (PWhatsappno.getText().toString().isEmpty() || PWhatsappno.getText().toString().length()<10 || PWhatsappno.getText().toString().length()>10)
+        {
+            PWhatsappno.requestFocus();
+            PWhatsappno.setError("Enter the 10 digit number");
+        }
+        if (PEmailid.getText().toString().isEmpty())
+        {
+            PEmailid.requestFocus();
+            PEmailid.setError("Enter the email id");
+        }
+        if(rel.equals("Select"))
+        {
+            ((TextView) relation.getSelectedView()).setError("Select the account type");
+        }
+        else
+        {
+            return 1;
+        }
+        return 0;
+    }
+
+    public void registerStudent(View view)
+    {
+        if(studentFormValidation()==1)
+        {
+
+        }
+    }
+}
