@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "309287250357",
+    "firebase_url": "https://st-interaction.firebaseio.com",
+    "project_id": "st-interaction",
+    "storage_bucket": "st-interaction.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309287250357:android:568c706cb21e7300",
+        "android_client_info": {
+          "package_name": "com.example.delllaptop.stinteraction"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309287250357-9dqq6ak2hvq09ntio7fm47j029tocbh1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.delllaptop.stinteraction",
+            "certificate_hash": "9886467D03A6606787ED18A341016C162AE22B65"
+          }
+        },
+        {
+          "client_id": "309287250357-he61edda6d66pkji5vjbdn9j9jsl8osj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrrdQDYxLkiqnQSHcYVpoXfghKVez_P-I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309287250357-he61edda6d66pkji5vjbdn9j9jsl8osj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

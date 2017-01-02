@@ -1,0 +1,15 @@
+Name		=	Login_Table
+Columns		=	Id, Name, Username, Password, Email_Id, Account_Type
+Primary Key 	=	Id, Email_Id
+
+
+Name		= 	Student_Table
+Columns		=	Id, Name, Roll_No, Year, Phone_Number, Whatsapp_Number, Email_Id, Address, Parent_Name, Parent_Phone_Number, Parent_Whatsapp_Number, Parent_Email_Id, Relation
+primary Key	=	Id
+Foriegn Key	=	Email_Id
+
+
+Name		= 	Teacher_Table
+Columns		=	Id, Name, Phone_Number, Whatsapp_Number, Email_Id, Faculty_Type
+Primary Key	=	Id
+Foriegn Key	=	Email_Id

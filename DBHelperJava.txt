@@ -1,0 +1,183 @@
+package com.example.delllaptop.stinteraction;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.EditText;
+
+/**
+ * Created by Feroz on 12/31/2016.
+ */
+
+public class DBHelper extends SQLiteOpenHelper {
+
+    LoginActivity la = new LoginActivity();
+
+    public static final String Db_Name = "Main_db";
+    public static final String Login_tbl = "Login_Table";
+    public static final String Student_tbl = "Student_Table";
+    public static final String Teacher_tbl = "Teacher_Table";
+
+    //Login Table Column Name
+    public static final String ID = "Id";
+    public static final String Name = "Name";
+    public static final String Username = "Username";
+    public static final String Pwd = "Password";
+    public static final String EmailId = "Email_Id";
+    public static final String AccType = "Account_Type";
+
+    //Student Table Column Name
+    /*public static final String ID = "Id";
+    public static final String Name = "Name";
+    public static final String EmailId = "Email_Id";*/
+    public static final String RollNo = "Roll_No";
+    public static final String Year = "Year";
+    public static final String Ph_No = "Phone_Number";
+    public static final String Whatsapp_No = "Whatsapp_Number";
+    public static final String Add = "Address";
+    public static final String P_Name = "Parent_Name";
+    public static final String P_Ph_No = "Parent_Phone_Number";
+    public static final String P_Whatsapp_No = "Parent_Whatsapp_Number";
+    public static final String P_EmailId = "Parent_Email_Id";
+    public static final String Rel = "Relation";
+
+    //Teacher Table Column Name
+    /*public static final String ID = "Id";
+    public static final String Name = "Name";
+    public static final String EmailId = "Email_Id";
+    public static final String Ph_No = "Phone_Number";
+    public static final String Whatsapp_No = "Whatsapp_Number";*/
+    public static final String Faculty = "Faculty";
+
+
+
+    public DBHelper(Context context) {
+
+        super(context,Db_Name, null, 1);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+
+        String Query1 = "CREATE TABLE " + Login_tbl + " (" + ID +" INTEGER PRIMARY KEY autoincrement," + Name + " TEXT," + Username +
+                " TEXT," +Pwd +" TEXT," + EmailId + " TEXT UNIQUE," + AccType + " TEXT);";
+
+        String Query2 = "CREATE TABLE " + Student_tbl + " (" + ID +" INTEGER PRIMARY KEY autoincrement," + Name + " TEXT," + RollNo +
+                " INTEGER," +Year +" TEXT," + Ph_No + " NUMERIC," + Whatsapp_No + " NUMERIC,"+ EmailId + " TEXT," + Add +
+                " TEXT,"+ P_Name + " TEXT,"+P_Ph_No +" NUMERIC,"+P_Whatsapp_No +" NUMERIC,"+ P_EmailId + " TEXT,"+
+                Rel +" TEXT);";
+
+        String Query3 = "CREATE TABLE " + Teacher_tbl + " (" + ID +" INTEGER PRIMARY KEY autoincrement," + Name + " TEXT," +
+                Ph_No + " NUMERIC," + Whatsapp_No + " NUMERIC,"+ EmailId + " TEXT," + Faculty +" TEXT);";
+
+        db.execSQL(Query1);
+        db.execSQL(Query2);
+        db.execSQL(Query3);
+
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+
+        String Query1 = "DROP TABLE IF EXISTS " + Login_tbl;
+        String Query2 = "DROP TABLE IF EXISTS " + Student_tbl;
+        String Query3 = "DROP TABLE IF EXISTS " + Teacher_tbl;
+
+        db.execSQL(Query1);
+        db.execSQL(Query2);
+        db.execSQL(Query3);
+
+        onCreate(db);
+
+    }
+
+    public boolean insertLogin(String name,String username,String pwd,String email,String accType)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(Name,name);
+        contentValues.put(Username,username);
+        contentValues.put(Pwd,pwd);
+        contentValues.put(EmailId,email);
+        contentValues.put(AccType,accType);
+
+        long result = db.insert(Login_tbl,null,contentValues);
+
+        if (result == -1)
+            return false;
+        else
+            return true;
+    }
+
+    public boolean insertStudent(String name,int roll,String yr,long ph,long wph,String email,String ad,String pname,
+                                 long pph,long pwph,String pemail,String relation)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(Name,name);
+        contentValues.put(RollNo,roll);
+        contentValues.put(Year,yr);
+        contentValues.put(Ph_No,ph);
+        contentValues.put(Whatsapp_No,wph);
+        contentValues.put(EmailId,email);
+        contentValues.put(Add,ad);
+        contentValues.put(P_Name,pname);
+        contentValues.put(P_Ph_No,pph);
+        contentValues.put(P_Whatsapp_No,pwph);
+        contentValues.put(P_EmailId,pemail);
+        contentValues.put(Rel,relation);
+
+        long result = db.insert(Student_tbl,null,contentValues);
+
+        if (result == -1)
+            return false;
+        else
+            return true;
+    }
+
+    public boolean insertTeacher(String name,long ph,long wph,String email,String fac)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(Name,name);
+        contentValues.put(Ph_No,ph);
+        contentValues.put(Whatsapp_No,wph);
+        contentValues.put(EmailId,email);
+        contentValues.put(Faculty,fac);
+
+        long result = db.insert(Teacher_tbl,null,contentValues);
+
+        if (result == -1)
+            return false;
+        else
+            return true;
+    }
+
+    public int validate(String username,String password)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] selectionArgs = new String[]{username, password};
+        try
+        {
+            int i = 0;
+            Cursor c = null;
+            c = db.rawQuery("select * from "+Login_tbl+" where username=? and password=?", selectionArgs);
+            c.moveToFirst();
+            i = c.getCount();
+            c.close();
+            return i;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+}

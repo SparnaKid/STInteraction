@@ -1,0 +1,111 @@
+package com.example.delllaptop.stinteraction;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class TeacherForm extends AppCompatActivity {
+
+    MainForm mf = new MainForm();
+    DBHelper dbase = new DBHelper(this);
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_teacher_form);
+
+
+    }
+
+    public int teacherFormValidation()
+    {
+        EditText Phoneno,Whatsappno;
+        Spinner faculty;
+
+        int i =0;
+
+        Phoneno = (EditText) this.findViewById(R.id.PhoneNo1ET);
+        Whatsappno =(EditText) this.findViewById(R.id.WhatsappNo1ET);
+        faculty = (Spinner) this.findViewById(R.id.FacultyTypeS);
+
+        String fac = String.valueOf(faculty.getSelectedItem());
+
+        if (Phoneno.getText().toString().isEmpty() || Phoneno.getText().toString().length()<10 || Phoneno.getText().toString().length()>10)
+        {
+            Phoneno.requestFocus();
+            Phoneno.setError("Enter the 10 digit number");
+            i++;
+        }
+        if (Whatsappno.getText().toString().isEmpty() || Whatsappno.getText().toString().length()<10 || Whatsappno.getText().toString().length()>10)
+        {
+            Whatsappno.requestFocus();
+            Whatsappno.setError("Enter the 10 digit number");
+            i++;
+        }
+        if (fac.equals("Select"))
+        {
+            ((TextView) faculty.getSelectedView()).setError("Select the account type");
+            i++;
+        }
+        if(i == 0)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public void data()
+    {
+        EditText NameEt,UsernameEt,PasswordEt,EmailIdEt,Phoneno,Whatsappno;
+        Spinner spinner,faculty;
+
+        NameEt = (EditText) this.findViewById(R.id.NameET);
+        UsernameEt = (EditText) this.findViewById(R.id.Username1ET);
+        PasswordEt = (EditText) this.findViewById(R.id.Password1ET);
+        EmailIdEt = (EditText) this.findViewById(R.id.EmailIdET);
+        Phoneno = (EditText) this.findViewById(R.id.PhoneNo1ET);
+        Whatsappno =(EditText) this.findViewById(R.id.WhatsappNo1ET);
+        faculty = (Spinner) this.findViewById(R.id.FacultyTypeS);
+        spinner = (Spinner) this.findViewById(R.id.AccTypeS);
+
+        boolean inserted1 = dbase.insertLogin(NameEt.getText().toString(),
+                UsernameEt.getText().toString(),
+                PasswordEt.getText().toString(),
+                EmailIdEt.getText().toString(),
+                spinner.getSelectedItem().toString());
+
+        boolean inserted2 = dbase.insertTeacher(NameEt.getText().toString(),
+                Long.parseLong(Phoneno.getText().toString()),
+                Long.parseLong(Whatsappno.getText().toString()),
+                EmailIdEt.getText().toString(),
+                faculty.getSelectedItem().toString());
+
+        if(inserted1 == true && inserted2 == true)
+        {
+            Toast.makeText(getApplicationContext(), "Account Created",
+                    Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Account Creation Failed",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void registerTeacher(View view)
+    {
+        if(teacherFormValidation()==1)
+        {
+            data();
+
+        }
+    }
+
+}

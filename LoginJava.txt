@@ -1,0 +1,86 @@
+package com.example.delllaptop.stinteraction;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.content.Intent;
+import android.view.View;
+import android.widget.EditText;
+
+public class LoginActivity extends AppCompatActivity{
+
+    DBHelper dbase;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        dbase = new DBHelper(this);
+
+    }
+
+    public int LoginPageValidation()
+    {
+        int i =0;
+        EditText UsernameET = (EditText) this.findViewById(R.id.UsernameET);
+        EditText PasswordET = (EditText) this.findViewById(R.id.PasswordET);
+
+
+        if (UsernameET.length() == 0)
+        {
+            UsernameET.requestFocus();
+            UsernameET.setError("Please Enter the Username");
+            i++;
+        }
+        if (PasswordET.length()==0)
+        {
+            PasswordET.requestFocus();
+            PasswordET.setError("Please Enter the Password");
+            i++;
+        }
+        if(i == 0)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public boolean dbValidation()
+    {
+        EditText UsernameET = (EditText) this.findViewById(R.id.UsernameET);
+        EditText PasswordET = (EditText) this.findViewById(R.id.PasswordET);
+
+        String user = UsernameET.getText().toString();
+        String passwd = PasswordET.getText().toString();
+
+        int i = dbase.validate(user,passwd);
+
+        if (i == 1)
+            return true;
+        else
+            return false;
+    }
+
+    public void GoToDashboard(View view)
+    {
+        if(LoginPageValidation()==1 && dbValidation()==true)
+        {
+            Intent i = new Intent(this, MainForm.class);
+            startActivity(i);
+        }
+
+    }
+
+    int valid = 0;
+
+    public  void GoToRegistration(View view)
+    {
+        Intent i =  new Intent(this,MainForm.class);
+        startActivity(i);
+
+    }
+
+}
